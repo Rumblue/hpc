@@ -45,10 +45,11 @@ class AdminManager implements ManagerInterface
 
 
 
-    public function insertUser(AdminManager $admin){
+    public function insertUser(AdminManager $admin): bool
+    {
 
-        $query = $this->pdo->prepare("INSERT INTO cmc_admin(user_login, user_pwd, user_mail, perm_user, user_uniqID) VALUES (:userID, :user_login, :user_pwd, :user_mail, :perm_user, :user_uniqID)");
-
+        $query = $this->pdo->prepare("INSERT INTO cmc_admin(user_login, user_pwd, user_mail, perm_user) VALUES (:userID, :user_login, :user_pwd, :user_mail, :perm_user)");
+        
         $query->execute([
             'user_login' => $admin->getUserLogin(),
             'user_pwd' => $admin->getUserPwd(),
